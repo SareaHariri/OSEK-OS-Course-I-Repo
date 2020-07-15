@@ -1,0 +1,41 @@
+CPU CORTEX-M4 {
+        OS S_OSEK {
+				STATUS = EXTENDED ;
+				STARTUPHOOK = FALSE;
+				ERRORHOOK = FALSE;
+				STACKOVERFLOWHOOK = TRUE;
+				SHUTDOWNHOOK = FALSE;
+				PRETASKHOOK = FALSE;
+				POSTTASKHOOK = FALSE;
+				USEGETSERVICEID = FALSE;
+				USEPARAMETERACCESS = FALSE;
+				USERESSCHEDULER = FALSE;
+				SYSTEMTICKMS = 10
+        };
+        TASK TaskA {
+                PRIORITY = 10;
+                SCHEDULE = FULL;
+                ACTIVATION = 1;
+                AUTOSTART = TRUE 
+                STACKSIZE = 50;
+                RESOURCE = SharedRes; 
+        };
+        TASK TaskB {
+                PRIORITY = 11;
+                SCHEDULE = FULL;
+                ACTIVATION = 1;
+                AUTOSTART = FALSE 
+                STACKSIZE = 50;
+                RESOURCE = SharedRes; 
+      };		 
+		TASK TaskC {
+					PRIORITY = 20; 
+					SCHEDULE = FULL; 
+					ACTIVATION = 1; 
+					AUTOSTART = FALSE 
+					STACKSIZE = 50; 
+		};
+      RESOURCE SharedRes{
+            RESOURCEPROPERITY = STANDARD ; 
+      }
+};

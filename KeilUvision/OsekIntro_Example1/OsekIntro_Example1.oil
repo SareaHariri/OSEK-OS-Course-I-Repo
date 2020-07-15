@@ -1,0 +1,36 @@
+CPU CORTEX-M4 {
+        OS S_OSEK {
+				STATUS = EXTENDED ;
+				STARTUPHOOK = FALSE;
+				ERRORHOOK = FALSE;
+				STACKOVERFLOWHOOK = FALSE;
+				SHUTDOWNHOOK = FALSE;
+				PRETASKHOOK = FALSE;
+				POSTTASKHOOK = FALSE;
+				USEGETSERVICEID = FALSE;
+				USEPARAMETERACCESS = FALSE;
+				USERESSCHEDULER = FALSE;
+				SYSTEMTICKMS = 10
+        };
+        TASK TaskA {
+                PRIORITY = 10;
+                SCHEDULE = FULL;
+                ACTIVATION = 1;
+                AUTOSTART = TRUE {APPMODE = AppMode1;};
+                STACKSIZE = 50;
+        };
+        TASK TaskB {
+                PRIORITY = 11;
+                SCHEDULE = FULL;
+                ACTIVATION = 1;
+                AUTOSTART = FALSE {APPMODE = AppMode1;};
+                STACKSIZE = 50;
+      };		 
+		TASK TaskC {
+					PRIORITY = 12; 
+					SCHEDULE = FULL; 
+					ACTIVATION = 1; 
+					AUTOSTART = FALSE 
+					STACKSIZE = 50; 
+		};
+};
