@@ -27,7 +27,6 @@ CPU CORTEX-M4 {
                 AUTOSTART = FALSE 
                 STACKSIZE = 50;
                 RESOURCE = SharedRes; 
-
       };		 
 		TASK TaskC {
 					PRIORITY = 20; 
