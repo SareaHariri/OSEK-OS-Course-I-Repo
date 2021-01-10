@@ -1,0 +1,86 @@
+/**
+ * os.oil this is the Task Management Coding Exercise Starter oil description 
+ * You have to change the oil description to achieve the requirements 
+ * 
+ * PLEASE FOLLOW THE SAME FORMAT EXACTLY AND DON'T CHANGE THE INDENTATION OR THE SPACING 
+ * PLEASE DON'T KEEP ANY BLANK LINE 
+ * PLEASE ADD A SPACE AROUND THE '=' SIGN WHEN YOU ASSIGN A VALUE TO AN ATTRIBUTE AS BELOW: 
+ *             PRIORITY = 400 NOT PRIORITY=400 
+ * PLEASE KEEP THE CLOSING BRACE IN A SEPARATE LINE AND THE OPENING BRACE IN THE SAME LINE AS BELOW
+ *             TASK XX { 
+ *                   ..
+ *                   ... 
+ *             }; 
+ *
+ /
+CPU CORTEX-M4 {
+      OS S_OSEK {
+         STATUS = EXTENDED ;
+         STARTUPHOOK = FALSE;
+         ERRORHOOK = FALSE;
+         STACKOVERFLOWHOOK = FALSE;
+         SHUTDOWNHOOK = FALSE;
+         PRETASKHOOK = FALSE;
+         POSTTASKHOOK = FALSE;
+         USEGETSERVICEID = FALSE;
+         USEPARAMETERACCESS = FALSE;
+         USERESSCHEDULER = FALSE;
+         SYSTEMTICKMS = 10
+      };
+      TASK AppTask_Init {
+         PRIORITY = 100;
+         SCHEDULE = FULL;
+         ACTIVATION = 1;
+         AUTOSTART = TRUE; 
+         STACKSIZE = 50;
+      };
+      TASK AppTask_Green {
+         PRIORITY = 10;
+         SCHEDULE = FULL;
+         ACTIVATION = 1;
+         AUTOSTART = FALSE; 
+         STACKSIZE = 50;
+      };
+      TASK AppTask_Red {
+         PRIORITY = 20;
+         SCHEDULE = FULL;
+         ACTIVATION = 1;
+         AUTOSTART = FALSE;
+         STACKSIZE = 50;
+      };
+      ALARM Alrm_SystemTimerUpdate {
+         COUNTER = MainCounter;
+         ACTION =   ALARMCALLBACK{
+            ALARMCALLBACKNAME = "AppCB_SystemTimerUpdate"; 
+         };
+         AUTOSTART = TRUE{
+            ALARMTIME = 1; 
+            CYCLETIME = 1;  
+         }; 
+      };
+      ALARM Alrm_AppTask_300 {
+         COUNTER = MainCounter;
+         ACTION =   ACTIVATETASK{
+            TASK = AppTask_Green; 
+         };
+         AUTOSTART = TRUE{
+            ALARMTIME = 200; 
+            CYCLETIME = 400;  
+         }; 
+      };
+      ALARM Alrm_AppTask_25 {
+         COUNTER = MainCounter;
+         ACTION =   ACTIVATETASK{
+            TASK = AppTask_Red; 
+         };
+         AUTOSTART = TRUE{
+            ALARMTIME = 200; 
+            CYCLETIME = 25;  
+         }; 
+      };
+      COUNTER MainCounter {
+         MINCYCLE = 1;
+         MAXALLOWEDVALUE = 0xFFFFFFFF;
+         TICKSPERBASE = 1;
+      };
+};
